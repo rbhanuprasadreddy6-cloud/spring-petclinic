@@ -1,5 +1,7 @@
 pipeline {
     agent {label 'SPC'}
+    triggers {
+        pollscm('* * * * *')
     stages { 
         stage ('git checkout') { 
             steps { 
@@ -9,8 +11,10 @@ pipeline {
         }
         stage ('build and scan') { 
             steps { 
+             WithSonarQubeEnv("SONAR") { 
                 sh 'mvn package sonar:sonar'
             }
+          }
         }
     }
 }        
