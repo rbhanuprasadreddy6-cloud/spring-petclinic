@@ -1,0 +1,23 @@
+pipeline {
+    agent {label 'SPC'}
+    stages { 
+        stage ('git checkout') { 
+            steps { 
+                git url: 'https://github.com/rbhanuprasadreddy6-cloud/spring-petclinic.git',
+                    branch: 'main'
+            }
+        }
+        stage ('build and scan') { 
+            steps { 
+                sh 'mvn package sonar:sonar'
+            }
+        }
+    }
+}        
+                    '
+
+    
+         
+         
+         
+                        
